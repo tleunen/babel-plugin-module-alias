@@ -20,14 +20,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, and build
+      - name: yarn install, lint and test
         run: |
-          npm ci
-          npm run build --if-present
+          yarn install
+          yarn run lint
+          yarn run test --ci
         env:
           CI: true
-      - name: npm test
-        run: npm run test:coverage
       - name: coverage
         uses: codecov/codecov-action@v1.0.5
         if: matrix.node-version == '13.x'

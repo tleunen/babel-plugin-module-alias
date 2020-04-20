@@ -1,0 +1,8 @@
+{
+  "root": "./tests/testproject/src",
+  "alias": {
+    "test": "./tests/testproject/test",
+    "@babel/core": "@babel/core/lib",
+    "babel-core": "babel-core/lib"
+  }
+}

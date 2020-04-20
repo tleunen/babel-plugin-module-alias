@@ -3,10 +3,8 @@ import resolvePath from './resolvePath';
 import transformCall from './transformers/call';
 import transformImport from './transformers/import';
 
-
 // Public API for external plugins
 export { resolvePath };
-
 
 const importVisitors = {
   CallExpression: transformCall,

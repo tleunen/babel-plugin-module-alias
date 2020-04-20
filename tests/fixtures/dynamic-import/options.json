@@ -1,0 +1,7 @@
+{
+  "root": "./tests/testproject/src",
+  "alias": {
+    "test": "./tests/testproject/test"
+  },
+  "transformFunctions": ["customMethod.something"]
+}

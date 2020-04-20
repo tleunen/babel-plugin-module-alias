@@ -2,7 +2,6 @@ import path from 'path';
 
 import mapToRelative from '../src/mapToRelative';
 
-
 describe('mapToRelative', () => {
   describe('should map to relative path with a custom cwd', () => {
     it('with a relative filename', () => {

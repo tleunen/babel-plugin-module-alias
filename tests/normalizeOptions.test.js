@@ -1,6 +1,5 @@
 import normalizeOptions from '../src/normalizeOptions';
 
-
 describe('normalizeOptions', () => {
   beforeEach(() => {
     normalizeOptions.resetRecomputations();

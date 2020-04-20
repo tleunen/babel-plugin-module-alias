@@ -1,0 +1,5 @@
+{
+  "alias": {
+    "testArr": ["/src", "./tests/testproject/src", "/tests", "./tests/testproject/test"]
+  }
+}
