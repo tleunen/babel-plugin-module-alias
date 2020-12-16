@@ -9,6 +9,14 @@ export function nodeResolvePath(modulePath, basedir, extensions) {
   }
 }
 
+export function nodeResolveRelativePath(modulePath, extensions) {
+  try {
+    return resolve.sync(modulePath, { extensions });
+  } catch (e) {
+    return null;
+  }
+}
+
 export function isRelativePath(nodePath) {
   return nodePath.match(/^\.?\.\//);
 }

@@ -2,8 +2,9 @@ import path from 'path';
 
 import { warn } from './log';
 import mapToRelative from './mapToRelative';
+import mapToAbsolute from './mapToAbsolute';
 import normalizeOptions from './normalizeOptions';
-import { nodeResolvePath, replaceExtension, isRelativePath, toLocalPath, toPosixPath } from './utils';
+import { nodeResolvePath, nodeResolveRelativePath, replaceExtension, isRelativePath, toLocalPath, toPosixPath } from './utils';
 
 function getRelativePath(sourcePath, currentFile, absFileInRoot, opts) {
   const realSourceFileExtension = path.extname(absFileInRoot);
@@ -89,13 +90,27 @@ function resolvePathFromAliasConfig(sourcePath, currentFile, opts) {
   return aliasedSourceFile;
 }
 
+function resolvePathFromRelativeConfig(sourcePath, currentFile, opts) {
+  if (isRelativePath(sourcePath)) {
+    const absFilePath = mapToAbsolute(currentFile, sourcePath);
+    const resolvedSourceFile = nodeResolveRelativePath(absFilePath, opts.extensions);
+
+    if (resolvedSourceFile) {
+      return getRelativePath(sourcePath, currentFile, resolvedSourceFile, opts);
+    }
+  }
+
+  return null;
+}
+
 const resolvers = [
   resolvePathFromAliasConfig,
+  resolvePathFromRelativeConfig,
   resolvePathFromRootConfig,
 ];
 
 export default function resolvePath(sourcePath, currentFile, opts) {
-  if (isRelativePath(sourcePath)) {
+  if (isRelativePath(sourcePath) && path.extname(sourcePath)) {
     return sourcePath;
   }
 

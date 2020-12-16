@@ -254,6 +254,22 @@ describe('module-resolver', () => {
         );
       });
 
+      it('should not resolve the relative file path with an unknown extension', () => {
+        testWithImport(
+          './test/testproject/src/text',
+          './test/testproject/src/text',
+          rootTransformerOpts,
+        );
+      });
+
+      it('should resolve the relative file path with a known defined extension & strip the extension', () => {
+        testWithImport(
+          './test/testproject/src/rn',
+          './test/testproject/src/rn',
+          rootTransformerOpts,
+        );
+      });
+
       it('should resolve the file path with a known defined extension & strip the extension', () => {
         testWithImport(
           'rn',
@@ -262,9 +278,18 @@ describe('module-resolver', () => {
         );
       });
 
+
       it('should resolve the file path with an explicit extension and not strip the extension', () => {
         testWithImport(
           'rn/index.ios.js',
+          './test/testproject/src/rn/index.ios.js',
+          rootTransformerOpts,
+        );
+      });
+
+      it('should resolve the relative file path with an explicit extension and not strip the extension', () => {
+        testWithImport(
+          './test/testproject/src/rn/index.ios.js',
           './test/testproject/src/rn/index.ios.js',
           rootTransformerOpts,
         );
@@ -291,9 +316,26 @@ describe('module-resolver', () => {
         );
       });
 
+      it('should not resolve the relative file path with an unknown extension', () => {
+        testWithImport(
+          './test/testproject/src/text',
+          './test/testproject/src/text',
+          rootTransformerOpts,
+        );
+      });
+
       it('should resolve the file path with a known defined extension', () => {
         testWithImport(
           'rn',
+          './test/testproject/src/rn/index.ios.js',
+          rootTransformerOpts,
+        );
+      });
+
+
+      it('should resolve the relative file path with a known defined extension', () => {
+        testWithImport(
+          './test/testproject/src/rn/index',
           './test/testproject/src/rn/index.ios.js',
           rootTransformerOpts,
         );
